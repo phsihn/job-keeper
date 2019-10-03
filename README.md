@@ -3,7 +3,7 @@
 # Goal: Providing user the ability to keep track of jobs that they have applied for. Displays a feed of jobs that user has applied to and the status of the jobs/notes/ etc...
 
 Currently implementing each feature. Right now everything is run locally.
-User can currently add jobs and update them. Looking to implement a delete feature right now.
+User can currently add jobs and update them. Looking to implement a delete feature.
 
 ## Technology used: MERN stack. M - MongoDB, E - Express.js, R - React.js, N - Node.js
 
