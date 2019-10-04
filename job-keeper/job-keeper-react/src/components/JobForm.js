@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { throwStatement } from '@babel/types';
 
 class JobForm extends Component {
 	constructor(props) {
@@ -80,6 +81,8 @@ class JobForm extends Component {
 			jobs_submit_date: '',
 			jobs_notes: ''
 		});
+
+		this.props.update(true);
 	}
 
 	render() {

@@ -3,25 +3,7 @@ import JobForm from '../components/JobForm';
 
 import axios from 'axios';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
-const Job = props => (
-	<tr>
-		<td>{props.job.jobs_company_name}</td>
-		<td>{props.job.jobs_position}</td>
-		<td>{props.job.jobs_location}</td>
-		<td>{props.job.jobs_submit_date}</td>
-		<td>{props.job.jobs_notes}</td>
-		<td>
-			<FontAwesomeIcon icon={faEdit} className='fa-fw is-large has-text-link' />
-			<FontAwesomeIcon
-				icon={faTrashAlt}
-				className='fa-fw is-large has-text-link'
-			/>
-		</td>
-	</tr>
-);
+import JobRow from '../components/JobRow';
 
 class JobFeed extends Component {
 	constructor(props) {
@@ -32,14 +14,7 @@ class JobFeed extends Component {
 		};
 	}
 
-	displayJobForm = () => {
-		this.setState({
-			displayJobForm: !this.state.displayJobForm
-		});
-	};
-
-	// gets the data
-	componentDidMount() {
+	getData = () => {
 		axios
 			.get('http://localhost:4000/jobs/')
 			.then(response => {
@@ -48,11 +23,23 @@ class JobFeed extends Component {
 			.catch(function(error) {
 				console.log(error);
 			});
+	};
+
+	displayJobForm = () => {
+		this.getData();
+		this.setState({
+			displayJobForm: !this.state.displayJobForm
+		});
+	};
+
+	// gets the data
+	componentDidMount() {
+		this.getData();
 	}
 
 	jobsList() {
 		return this.state.jobs.map(function(currentJob, i) {
-			return <Job job={currentJob} key={i} />;
+			return <JobRow job={currentJob} key={i} />;
 		});
 	}
 
@@ -60,7 +47,7 @@ class JobFeed extends Component {
 		let jobForm;
 
 		if (this.state.displayJobForm) {
-			jobForm = <JobForm />;
+			jobForm = <JobForm update={this.displayJobForm} />;
 		}
 		return (
 			<React.Fragment>

@@ -55,7 +55,12 @@ jobsRoutes.route('/add').post(function(req, res) {
 });
 
 // a delete method
-jobsRoutes.route('/delete').delete(function(req, res) {});
+jobsRoutes.route('/delete/:id').get(function(req, res) {
+	Jobs.findByIdAndRemove({ _id: req.params.id }, function(err, job) {
+		if (err) res.json(err);
+		else res.json('Successfully removed!!!!!!!');
+	});
+});
 
 // a post update method
 jobsRoutes.route('/update/:id').post(function(req, res) {
