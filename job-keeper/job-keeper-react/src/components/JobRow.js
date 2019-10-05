@@ -14,8 +14,6 @@ class JobRow extends Component {
 			.get('http://localhost:4000/jobs/delete/' + this.props.job._id)
 			.then(console.log('Deleted'))
 			.catch(err => console.log(this.props.job._id));
-
-		this.props.deleteRow();
 	}
 
 	render() {
